@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Submit Diagnosis - MedTrack</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
+</head>
+<body class="patient-dashboard">
+  <div class="container">
+    <h2>Submit Diagnosis Report</h2>
+    <form method="post">
+      <label>Doctor's Name:</label>
+      <input type="text" name="doctor" required>
+
+      <label>Diagnosis Notes:</label>
+      <textarea name="notes" rows="5" required></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+    <p><a href="/dashboard">← Back to Dashboard</a></p>
+    <a href="/logout">Logout</a>
+
+  </div>
+</body>
+</html>

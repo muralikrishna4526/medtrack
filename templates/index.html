@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MedTrack - Cloud Healthcare</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
+</head>
+<body class="homepage">
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-left">
+      <img src="{{ url_for('static', filename='logo.png') }}" alt="MedTrack Logo" class="nav-logo">
+      <span class="brand">MedTrack</span>
+    </div>
+    <div class="nav-right">
+      <a href="/">Home</a>
+      <a href="/register">Register</a>
+      <a href="#about">About</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Welcome to MedTrack</h1>
+    <p>Your Cloud-Enabled Healthcare Management System</p>
+    <a href="/register" class="btn">Get Started</a>
+  </section>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <h2>Why MedTrack?</h2>
+    <p>MedTrack connects patients and doctors with cloud-powered technology. Book appointments, track diagnoses, and manage healthcare—all in one place.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 MedTrack | Built with ❤️ for SmartBridge AWS Project</p>
+  </footer>
+
+</body>
+</html>

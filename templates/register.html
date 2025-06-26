@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register - MedTrack</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
+</head>
+<body class="auth-page">
+
+  <div class="form-container">
+    <h2>Register to MedTrack</h2>
+    <form method="post" action="/register">
+      <label>Username:</label>
+      <input type="text" name="username" placeholder="Enter your username" required>
+
+      <label>Password:</label>
+      <input type="password" name="password" placeholder="Create a password" required>
+
+      <label>Role:</label>
+      <select name="role" required>
+        <option value="" disabled selected>Select Role</option>
+        <option value="patient">Patient</option>
+        <option value="doctor">Doctor</option>
+      </select>
+
+      <button type="submit">Register</button>
+    </form>
+
+    <p>Already have an account? <a href="/login">Login here</a></p>
+    <a href="/" class="back-home">← Back to Home</a>
+  </div>
+
+</body>
+</html>

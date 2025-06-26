@@ -1,0 +1,22 @@
+[
+  {
+    "patient": "Murali",
+    "doctor": "Krishna",
+    "notes": "Suffering from fever and head ache"
+  },
+  {
+    "patient": "Murali",
+    "doctor": "Krishna",
+    "notes": "Suffering from fever and head ache "
+  },
+  {
+    "patient": "Venkat",
+    "doctor": "Krishna",
+    "notes": "Suffering from fever and headache,cough"
+  },
+  {
+    "patient": "Venkata",
+    "doctor": "Balaji",
+    "notes": "Suffering from headache and stress"
+  }
+]

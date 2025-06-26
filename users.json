@@ -1,0 +1,30 @@
+{
+    "Krishna": {
+        "password": "Murali@12",
+        "role": "doctor"
+    },
+    "Murali": {
+        "password": "Murali@12",
+        "role": "patient"
+    },
+    "murali krishna": {
+        "password": "mu123",
+        "role": "patient"
+    },
+    "doctor": {
+        "password": "demo",
+        "role": "doctor"
+    },
+    "Venkat": {
+        "password": "Murali@12",
+        "role": "patient"
+    },
+    "Venkata": {
+        "password": "Murali@12",
+        "role": "patient"
+    },
+    "Balaji": {
+        "password": "Murali@12",
+        "role": "doctor"
+    }
+}

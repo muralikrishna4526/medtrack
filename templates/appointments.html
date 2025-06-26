@@ -1,0 +1,32 @@
+<!-- templates/appointments.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Appointments - MedTrack</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="patient-dashboard">
+
+  <div class="container">
+    <h2>📅 My Appointments</h2>
+
+    {% if appointments %}
+      <ul>
+        {% for appt in appointments %}
+          <li>
+            <strong>Date:</strong> {{ appt.date }}<br>
+            <strong>Time:</strong> {{ appt.time }}<br>
+            <strong>Doctor:</strong> {{ appt.doctor }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No appointments booked yet.</p>
+    {% endif %}
+
+    <a href="/dashboard">← Back to Dashboard</a>
+  </div>
+
+</body>
+</html>

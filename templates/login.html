@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - MedTrack</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
+</head>
+<body class="auth-page">
+
+  <div class="form-container">
+    <h2>Login to MedTrack</h2>
+    <form action="/login" method="post">
+      <label>Username:</label>
+      <input type="text" name="username" placeholder="Enter your username" required>
+
+      <label>Password:</label>
+      <input type="password" name="password" placeholder="Enter your password" required>
+
+      <button type="submit">Login</button>
+    </form>
+
+    <p>Don’t have an account? <a href="/register">Register here</a></p>
+    <a href="/" class="back-home">← Back to Home</a>
+  </div>
+
+</body>
+</html>

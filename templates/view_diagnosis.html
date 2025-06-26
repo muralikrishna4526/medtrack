@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>View Diagnosis - MedTrack</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
+</head>
+<body class="doctor-dashboard">
+  <div class="container">
+    <h2>Diagnosis Reports</h2>
+    {% if diagnoses %}
+      <ul>
+        {% for diag in diagnoses %}
+          <li><strong>{{ diag.patient }}</strong>: {{ diag.notes }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No diagnosis reports available.</p>
+    {% endif %}
+    <p><a href="/dashboard">← Back to Dashboard</a></p>
+    <a href="/logout">Logout</a>
+
+  </div>
+</body>
+</html>
