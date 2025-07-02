@@ -104,7 +104,7 @@ def view_diagnosis_route():
     if 'username' not in session or session['role'] != 'doctor':
         return redirect('/')
     diagnoses = get_doctor_diagnoses(session['username'])
-    return render_template('view_diagnosis.html', diagnoses=diagnoses)
+    return render_template('view_diagnosis.html', diagnoses=diagnoses) 
 
 @app.route('/my-diagnosis')
 def my_diagnosis():
