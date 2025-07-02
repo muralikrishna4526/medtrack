@@ -30,3 +30,8 @@ def submit_diagnosis(patient, doctor, notes):
 def get_doctor_diagnoses(doctor):
     diagnoses = load_diagnoses()
     return [d for d in diagnoses if d['doctor'] == doctor]
+
+# ✅ Called by patients to view their own reports
+def get_patient_diagnoses(patient):
+    diagnoses = load_diagnoses()
+    return [d for d in diagnoses if d['patient'] == patient]

@@ -1,3 +1,4 @@
+<!-- templates/book.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,11 +10,11 @@
 <body class="patient-dashboard">
 
   <div class="container">
-    <h2>Book an Appointment</h2>
-    
+    <h2>📅 Book an Appointment</h2>
+
     <form method="POST" action="/book">
-      <label for="doctor">Doctor's Name:</label>
-      <input type="text" id="doctor" name="doctor" placeholder="Enter Doctor's Username" required>
+      <label for="doctor">Doctor's Username:</label>
+      <input type="text" id="doctor" name="doctor">
 
       <label for="date">Date:</label>
       <input type="date" id="date" name="date" required>
@@ -21,11 +22,10 @@
       <label for="time">Time:</label>
       <input type="time" id="time" name="time" required>
 
-      <button type="submit">Book Appointment</button>
+      <button type="submit">Book Now</button>
     </form>
 
     <p><a href="/dashboard">← Back to Dashboard</a></p>
-    <p><a href="/logout">Logout</a></p>
   </div>
 
 </body>

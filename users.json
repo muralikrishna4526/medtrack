@@ -26,5 +26,21 @@
     "Balaji": {
         "password": "Murali@12",
         "role": "doctor"
+    },
+    "ramu": {
+        "password": "123",
+        "role": "patient"
+    },
+    "john": {
+        "password": "1234",
+        "role": "patient"
+    },
+    "adam": {
+        "password": "123",
+        "role": "patient"
+    },
+    "Rama": {
+        "password": "123",
+        "role": "doctor"
     }
 }

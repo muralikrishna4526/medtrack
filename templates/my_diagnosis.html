@@ -1,29 +1,28 @@
-<!-- templates/appointments.html -->
+<!-- templates/my_diagnosis.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My Appointments - MedTrack</title>
+  <title>My Diagnoses - MedTrack</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
   <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
 </head>
 <body class="patient-dashboard">
 
   <div class="container">
-    <h2>📅 My Appointments</h2>
+    <h2>📋 My Diagnosis Reports</h2>
 
-    {% if appointments %}
+    {% if diagnoses %}
       <ul>
-        {% for appt in appointments %}
-          <li style="margin-bottom: 15px;">
-            <strong>👨‍⚕ Doctor:</strong> {{ appt.doctor }}<br>
-            <strong>📆 Date:</strong> {{ appt.date }}<br>
-            <strong>⏰ Time:</strong> {{ appt.time }}
+        {% for diag in diagnoses %}
+          <li style="margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 10px;">
+            <strong>👨‍⚕ Doctor:</strong> {{ diag.doctor }}<br>
+            <strong>📝 Notes:</strong> {{ diag.notes }}
           </li>
         {% endfor %}
       </ul>
     {% else %}
-      <p>No appointments booked yet.</p>
+      <p>No diagnosis reports found.</p>
     {% endif %}
 
     <p><a href="/dashboard">← Back to Dashboard</a></p>

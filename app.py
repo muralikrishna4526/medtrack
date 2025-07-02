@@ -2,6 +2,8 @@ from utils.appointments import book_appointment, get_user_appointments, get_doct
 from flask import Flask, render_template, request, redirect, session
 from utils.aws_dynamo import register_user, validate_login
 from utils.diagnosis import submit_diagnosis, get_doctor_diagnoses
+from utils.diagnosis import get_patient_diagnoses
+
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Replace with a stronger key in production
@@ -78,17 +80,23 @@ def doctor_appointments():
     return render_template('doctor_appointments.html', appointments=appts)
 
 
-# ---------------- Submit Diagnosis ----------------
 @app.route('/submit-diagnosis', methods=['GET', 'POST'])
 def submit_diagnosis_route():
-    if 'username' not in session or session['role'] != 'patient':
+    if 'username' not in session or session['role'] != 'doctor':
         return redirect('/')
+    
     if request.method == 'POST':
-        doctor = request.form['doctor']
+        patient = request.form['patient']
         notes = request.form['notes']
-        submit_diagnosis(session['username'], doctor, notes)
+        submit_diagnosis(patient, session['username'], notes)
         return render_template("diagnosis_success.html")
-    return render_template('submit_diagnosis.html')
+
+    from utils.auth import load_users
+    users = load_users()
+    patients = [u['username'] for u in users if u['role'] == 'patient']
+
+    return render_template('submit_diagnosis.html', patients=patients)
+
 
 # ---------------- View Diagnosis ----------------
 @app.route('/view-diagnosis')
@@ -97,6 +105,17 @@ def view_diagnosis_route():
         return redirect('/')
     diagnoses = get_doctor_diagnoses(session['username'])
     return render_template('view_diagnosis.html', diagnoses=diagnoses)
+
+@app.route('/my-diagnosis')
+def my_diagnosis():
+    if 'username' not in session or session['role'] != 'patient':
+        return redirect('/')
+    diagnoses = get_patient_diagnoses(session['username'])
+    return render_template('my_diagnosis.html', diagnoses=diagnoses)
+
+
+
+
 
 # ---------------- Run the App ----------------
 if __name__ == '__main__':

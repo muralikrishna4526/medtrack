@@ -1,3 +1,4 @@
+<!-- templates/register.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,17 +10,18 @@
 <body class="auth-page">
 
   <div class="form-container">
-    <h2>Register to MedTrack</h2>
-    <form method="post" action="/register">
-      <label>Username:</label>
-      <input type="text" name="username" placeholder="Enter your username" required>
+    <h2>Create Your Account</h2>
 
-      <label>Password:</label>
-      <input type="password" name="password" placeholder="Create a password" required>
+    <form method="POST" action="/register">
+      <label for="username">👤 Username:</label>
+      <input type="text" name="username" id="username" placeholder="Enter your name" required>
 
-      <label>Role:</label>
-      <select name="role" required>
-        <option value="" disabled selected>Select Role</option>
+      <label for="password">🔐 Password:</label>
+      <input type="password" name="password" id="password" placeholder="Create a secure password" required>
+
+      <label for="role">🧾 Register as:</label>
+      <select name="role" id="role" required>
+        <option value="">-- Select Role --</option>
         <option value="patient">Patient</option>
         <option value="doctor">Doctor</option>
       </select>
@@ -27,8 +29,13 @@
       <button type="submit">Register</button>
     </form>
 
-    <p>Already have an account? <a href="/login">Login here</a></p>
-    <a href="/" class="back-home">← Back to Home</a>
+    <p class="back-home">
+      Already have an account? <a href="/login">Login here</a>
+    </p>
+
+    <p class="back-home">
+      <a href="/">← Back to Home</a>
+    </p>
   </div>
 
 </body>

@@ -200,8 +200,8 @@ footer {
 body {
   margin: 0;
   padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(135deg, #e0f7fa, #f1f8e9);
-  font-family: 'Segoe UI', Tahoma, sans-serif;
   color: #333;
 }
 
@@ -319,5 +319,160 @@ a:hover {
 .about {
   animation: slideUp 1s ease-out 1s forwards;
   opacity: 0;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 20px;
+  }
+  .nav-right {
+    margin-top: 10px;
+  }
+  .hero h1 {
+    font-size: 28px;
+  }
+  .form-container, .container {
+    width: 90%;
+    padding: 20px;
+  }
+}
+
+:root {
+  --primary-color: #00796b;
+  --accent-color: #009688;
+  --light-bg: #e0f7fa;
+  --text-color: #333;
+}
+
+body {
+  color: var(--text-color);
+  background: linear-gradient(135deg, var(--light-bg), #f1f8e9);
+}
+
+.btn {
+  background-color: var(--primary-color);
+}
+
+.btn:hover {
+  background-color: #004d40;
+}
+
+.highlight {
+  color: var(--accent-color);
+}
+
+.testimonials {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.testimonials h2 {
+  color: #00796b;
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+.testimonial-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.testimonial-cards .card {
+  flex: 1 1 250px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.testimonial-cards .card:hover {
+  transform: translateY(-5px);
+}
+
+.testimonial-cards p {
+  font-style: italic;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+.testimonial-cards h4 {
+  color: #00796b;
+  margin-top: 0;
+}
+
+.features {
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.features h2 {
+  color: var(--primary-color);
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+.feature-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+}
+
+.feature-cards .card {
+  flex: 1 1 280px;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.feature-cards .card:hover {
+  transform: translateY(-8px);
+}
+
+.feature-cards i {
+  color: var(--accent-color);
+  margin-bottom: 15px;
+}
+
+.feature-cards h3 {
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.contact {
+  max-width: 700px;
+  margin: 50px auto;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.contact h2 {
+  color: #00796b;
+  margin-bottom: 15px;
+}
+
+.contact p {
+  font-size: 16px;
+  color: #444;
+  margin: 8px 0;
+}
+
+.contact-details p {
+  margin: 5px 0;
+  font-weight: 500;
 }
 
