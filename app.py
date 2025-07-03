@@ -1,19 +1,50 @@
-from utils.appointments import book_appointment, get_user_appointments, get_doctor_appointments
 from flask import Flask, render_template, request, redirect, session
-from utils.aws_dynamo import register_user, validate_login
-from utils.diagnosis import submit_diagnosis, get_doctor_diagnoses
-from utils.diagnosis import get_patient_diagnoses
+import boto3
+import os
+from dotenv import load_dotenv
 
+# Load environment variables from .env
+load_dotenv()
 
+# 🔐 Load values from .env
+SECRET_KEY = os.getenv('SECRET_KEY')
+AWS_REGION = os.getenv('AWS_REGION_NAME')
+SNS_TOPIC_ARN = os.getenv('SNS_TOPIC_ARN')
+
+# Initialize Flask app
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Replace with a stronger key in production
+app.secret_key = SECRET_KEY
 
-# ---------------- Home Page ----------------
+# ✅ Import DB logic from utils
+from utils.aws_dynamo import register_user, validate_login, load_users
+from utils.appointments import book_appointment, get_user_appointments, get_doctor_appointments
+from utils.diagnosis import submit_diagnosis, get_doctor_diagnoses, get_patient_diagnoses
+
+# --------- AWS SNS Configuration ---------
+sns = boto3.client('sns', region_name=AWS_REGION)
+
+def send_notification(message, subject='Notification from MedTrack'):
+    if not SNS_TOPIC_ARN or "dummy" in SNS_TOPIC_ARN:
+        print("📢 Skipping SNS notification (not configured)")
+        return None
+    try:
+        response = sns.publish(
+            TopicArn=SNS_TOPIC_ARN,
+            Message=message,
+            Subject=subject
+        )
+        print("✅ SNS message sent:", response)
+        return response
+    except Exception as e:
+        print("❌ Error sending SNS message:", e)
+        return None
+
+# ---------------- Routes ----------------
+
 @app.route('/')
 def home():
     return render_template('index.html')
 
-# ---------------- Register ----------------
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -22,37 +53,30 @@ def register():
         return redirect('/login')
     return render_template('register.html')
 
-# ---------------- Login (GET) ----------------
-@app.route('/login')
-def show_login():
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        role = validate_login(username, password)
+        if role:
+            session['username'] = username
+            session['role'] = role
+            return redirect('/dashboard')
+        return "Invalid Credentials"
     return render_template('login.html')
 
-# ---------------- Login (POST) ----------------
-@app.route('/login', methods=['POST'])
-def login():
-    username = request.form['username']
-    password = request.form['password']
-    role = validate_login(username, password)
-    if role:
-        session['username'] = username
-        session['role'] = role
-        return redirect('/dashboard')
-    return "Invalid Credentials"
-
-# ---------------- Logout ----------------
 @app.route('/logout')
 def logout():
     session.clear()
     return redirect('/')
 
-# ---------------- Dashboard ----------------
 @app.route('/dashboard')
 def dashboard():
     if 'username' not in session:
         return redirect('/')
     return render_template('dashboard.html', username=session['username'], role=session['role'])
 
-# ---------------- Book Appointment ----------------
 @app.route('/book', methods=['GET', 'POST'])
 def book():
     if 'username' not in session:
@@ -62,6 +86,11 @@ def book():
         date = request.form['date']
         time = request.form['time']
         book_appointment(session['username'], doctor, date, time)
+
+        # 🔔 Send SNS notification
+        message = f"Appointment booked by {session['username']} with Dr. {doctor} on {date} at {time}."
+        send_notification(message, subject="New Appointment Booked")
+
         return redirect('/appointments')
     return render_template('book.html')
 
@@ -79,7 +108,6 @@ def doctor_appointments():
     appts = get_doctor_appointments(session['username'])
     return render_template('doctor_appointments.html', appointments=appts)
 
-
 @app.route('/submit-diagnosis', methods=['GET', 'POST'])
 def submit_diagnosis_route():
     if 'username' not in session or session['role'] != 'doctor':
@@ -89,16 +117,16 @@ def submit_diagnosis_route():
         patient = request.form['patient']
         notes = request.form['notes']
         submit_diagnosis(patient, session['username'], notes)
+
+        # 🔔 SNS notification
+        message = f"Dr. {session['username']} submitted a diagnosis for patient {patient}."
+        send_notification(message, subject="New Diagnosis Submitted")
+
         return render_template("diagnosis_success.html")
 
-    from utils.auth import load_users
-    users = load_users()
-    patients = [u['username'] for u in users if u['role'] == 'patient']
-
+    patients = [u['username'] for u in load_users() if u['role'] == 'patient']
     return render_template('submit_diagnosis.html', patients=patients)
 
-
-# ---------------- View Diagnosis ----------------
 @app.route('/view-diagnosis')
 def view_diagnosis_route():
     if 'username' not in session or session['role'] != 'doctor':
@@ -113,10 +141,6 @@ def my_diagnosis():
     diagnoses = get_patient_diagnoses(session['username'])
     return render_template('my_diagnosis.html', diagnoses=diagnoses)
 
-
-
-
-
-# ---------------- Run the App ----------------
+# ------------ Run the App ------------
 if __name__ == '__main__':
     app.run(debug=True)

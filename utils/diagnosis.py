@@ -1,37 +1,37 @@
-import json
+import boto3
+import uuid
 import os
+from dotenv import load_dotenv
 
-DIAGNOSIS_FILE = 'diagnoses.json'
+# Load environment variables from .env
+load_dotenv()
 
-# Load diagnosis data from JSON file
-def load_diagnoses():
-    if os.path.exists(DIAGNOSIS_FILE):
-        with open(DIAGNOSIS_FILE, 'r') as f:
-            return json.load(f)
-    return []
+# Get AWS region and table name from .env
+region = os.getenv('AWS_REGION_NAME', 'ap-south-1')
+diagnosis_table_name = os.getenv('DIAGNOSES_TABLE_NAME', 'Diagnoses')
 
-# Save diagnosis data to JSON file
-def save_diagnoses(data):
-    with open(DIAGNOSIS_FILE, 'w') as f:
-        json.dump(data, f, indent=2)
+# Connect to DynamoDB
+dynamodb = boto3.resource('dynamodb', region_name=region)
+diagnosis_table = dynamodb.Table(diagnosis_table_name)
 
-# Called by patients to submit diagnosis info
+# ✅ Submit a diagnosis (Doctor adds diagnosis for patient)
 def submit_diagnosis(patient, doctor, notes):
-    diagnoses = load_diagnoses()
-    new_entry = {
-        "patient": patient,
-        "doctor": doctor,
-        "notes": notes
-    }
-    diagnoses.append(new_entry)
-    save_diagnoses(diagnoses)
+    diagnosis_id = str(uuid.uuid4())
+    diagnosis_table.put_item(Item={
+        'diagnosis_id': diagnosis_id,
+        'patient': patient,
+        'doctor': doctor,
+        'notes': notes
+    })
 
-# Called by doctors to view their patient's reports
+# ✅ View diagnoses by doctor
 def get_doctor_diagnoses(doctor):
-    diagnoses = load_diagnoses()
-    return [d for d in diagnoses if d['doctor'] == doctor]
+    response = diagnosis_table.scan()
+    items = response.get('Items', [])
+    return [d for d in items if d['doctor'] == doctor]
 
-# ✅ Called by patients to view their own reports
+# ✅ View diagnoses by patient
 def get_patient_diagnoses(patient):
-    diagnoses = load_diagnoses()
-    return [d for d in diagnoses if d['patient'] == patient]
+    response = diagnosis_table.scan()
+    items = response.get('Items', [])
+    return [d for d in items if d['patient'] == patient]

@@ -1,33 +1,38 @@
-import json
+import boto3
+import uuid
 import os
+from dotenv import load_dotenv
 
-APPOINTMENTS_FILE = 'appointments.json'
+# Load environment variables
+load_dotenv()
 
-def load_appointments():
-    if not os.path.exists(APPOINTMENTS_FILE):
-        return []
-    with open(APPOINTMENTS_FILE, 'r') as f:
-        return json.load(f)
+# Get region and table name from .env
+region = os.getenv('AWS_REGION_NAME', 'ap-south-1')
+appointments_table_name = os.getenv('APPOINTMENTS_TABLE_NAME', 'Appointments')
 
-def save_appointments(data):
-    with open(APPOINTMENTS_FILE, 'w') as f:
-        json.dump(data, f, indent=2)
+# Connect to DynamoDB
+dynamodb = boto3.resource('dynamodb', region_name=region)
+appointments_table = dynamodb.Table(appointments_table_name)
 
+# ✅ Book an appointment
 def book_appointment(patient, doctor, date, time):
-    appointments = load_appointments()
-    new_appt = {
-        "patient": patient,
-        "doctor": doctor,
-        "date": date,
-        "time": time
-    }
-    appointments.append(new_appt)
-    save_appointments(appointments)
+    appointment_id = str(uuid.uuid4())
+    appointments_table.put_item(Item={
+        'appointment_id': appointment_id,
+        'patient': patient,
+        'doctor': doctor,
+        'date': date,
+        'time': time
+    })
 
+# ✅ Get appointments for a specific patient
 def get_user_appointments(username):
-    appointments = load_appointments()
-    return [a for a in appointments if a['patient'] == username]
+    response = appointments_table.scan()
+    items = response.get('Items', [])
+    return [a for a in items if a['patient'] == username]
 
+# ✅ Get appointments for a specific doctor
 def get_doctor_appointments(doctor_name):
-    appointments = load_appointments()
-    return [a for a in appointments if a['doctor'] == doctor_name]
+    response = appointments_table.scan()
+    items = response.get('Items', [])
+    return [a for a in items if a['doctor'] == doctor_name]

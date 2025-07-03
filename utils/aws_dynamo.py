@@ -1,26 +1,35 @@
-import json
+import boto3
 import os
+from dotenv import load_dotenv
 
-USERS_FILE = 'users.json'
+# Load environment variables
+load_dotenv()
 
+# Read region and table name from .env
+region = os.getenv('AWS_REGION_NAME', 'ap-south-1')
+users_table_name = os.getenv('USERS_TABLE_NAME', 'Users')
+
+# Connect to DynamoDB
+dynamodb = boto3.resource('dynamodb', region_name=region)
+users_table = dynamodb.Table(users_table_name)
+
+# Fetch all users (useful for admin or testing)
 def load_users():
-    if os.path.exists(USERS_FILE):
-        with open(USERS_FILE, 'r') as f:
-            return json.load(f)
-    return {}
+    response = users_table.scan()
+    return response.get('Items', [])
 
-def save_users(users):
-    with open(USERS_FILE, 'w') as f:
-        json.dump(users, f, indent=4)
-
+# Register a new user
 def register_user(username, password, role):
-    users = load_users()
-    users[username] = {'password': password, 'role': role}
-    save_users(users)
+    users_table.put_item(Item={
+        'username': username,
+        'password': password,
+        'role': role
+    })
 
+# Validate login credentials
 def validate_login(username, password):
-    users = load_users()
-    user = users.get(username)
+    response = users_table.get_item(Key={'username': username})
+    user = response.get('Item')
     if user and user['password'] == password:
         return user['role']
     return None
