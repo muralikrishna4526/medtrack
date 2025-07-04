@@ -13,7 +13,7 @@ SNS_TOPIC_ARN = os.getenv('SNS_TOPIC_ARN')
 
 # Initialize Flask app
 app = Flask(__name__)
-app.secret_key = SECRET_KEY
+app.secret_key = 'temp_secret_123!@#xyz987'
 
 # ✅ Import DB logic from utils
 from utils.aws_dynamo import register_user, validate_login, load_users
