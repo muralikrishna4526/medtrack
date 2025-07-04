@@ -1,7 +1,7 @@
 import boto3
 
 # Connect to DynamoDB in your region
-dynamodb = boto3.resource('dynamodb', region_name='ap-south-1')
+dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
 
 # Create the Diagnoses table
 table = dynamodb.create_table(

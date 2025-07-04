@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Read region and table name from .env
-region = os.getenv('AWS_REGION_NAME', 'ap-south-1')
+region = os.getenv('AWS_REGION_NAME', 'us-east-1')
 users_table_name = os.getenv('USERS_TABLE_NAME', 'Users')
 
 # Connect to DynamoDB
