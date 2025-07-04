@@ -142,5 +142,6 @@ def my_diagnosis():
     return render_template('my_diagnosis.html', diagnoses=diagnoses)
 
 # ------------ Run the App ------------
+# Run the application
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5000)
