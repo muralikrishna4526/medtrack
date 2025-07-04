@@ -8,7 +8,7 @@ load_dotenv()
 
 # 🔐 Load values from .env
 SECRET_KEY = os.getenv('SECRET_KEY')
-AWS_REGION = os.getenv('AWS_REGION_NAME')
+AWS_REGION = os.getenv('AWS_REGION_NAME','us-east-1')
 SNS_TOPIC_ARN = os.getenv('SNS_TOPIC_ARN')
 
 # Initialize Flask app
