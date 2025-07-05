@@ -1,0 +1,35 @@
+<!-- templates/dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ role.title() }} Dashboard - MedTrack</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
+</head>
+<body class="{{ 'patient-dashboard' if role == 'patient' else 'doctor-dashboard' }}">
+
+  <div class="container">
+    <h2>Welcome, {{ username }} 👋</h2>
+    <h3>{{ role.title() }} Dashboard</h3>
+
+    {% if role == 'patient' %}
+    <ul>
+      <li><a href="/book">📅 Book Appointment</a></li>
+      <li><a href="/appointments">🔍 View Appointments</a></li>
+      <li><a href="/my-diagnosis">📋 View My Diagnosis</a></li>
+    </ul>
+
+    {% elif role == 'doctor' %}
+    <ul>
+      <li><a href="/doctor-appointments">📅 View Your Appointments</a></li>
+      <li><a href="/submit-diagnosis">📝 Submit Diagnosis</a></li>
+      <li><a href="/view-diagnosis">📋 View Diagnoses</a></li>
+    </ul>
+    {% endif %}
+
+    <p><a href="/logout">🚪 Logout</a></p>
+  </div>
+
+</body>
+</html>
