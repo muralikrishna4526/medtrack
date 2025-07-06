@@ -6,12 +6,13 @@ MedTrack is a full-stack healthcare appointment and diagnosis management web app
 
 ## 🚀 Features
 
-- 👨‍⚕ *Role-based Login System* (Patient / Doctor)
-- 📅 *Book Appointments*
-- 📋 *Submit & View Diagnoses*
-- ☁ *DynamoDB Integration* for persistent cloud storage
-- 📣 *SNS Notifications* on booking and diagnosis submission
-- 💻 Responsive & user-friendly UI
+•	🔐 Secure login & role-based access (Patient / Doctor)
+•	📅 Book and view appointments
+•	📝 Submit and view diagnosis reports
+•	☁️ Data stored in AWS DynamoDB
+•	📣 Notifications via AWS SNS
+•	🌐 Deployed using AWS EC2
+
 
 ---
 
