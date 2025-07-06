@@ -1,0 +1,35 @@
+<!-- templates/login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - MedTrack</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
+</head>
+<body class="auth-page">
+
+  <div class="form-container">
+    <h2>Welcome Back 👋</h2>
+
+    <form method="POST" action="/login">
+      <label for="username">👤 Username:</label>
+      <input type="text" name="username" id="username" placeholder="Enter your username" required>
+
+      <label for="password">🔐 Password:</label>
+      <input type="password" name="password" id="password" placeholder="Enter your password" required>
+
+      <button type="submit">Login</button>
+    </form>
+
+    <p class="back-home">
+      Don’t have an account? <a href="/register">Register here</a>
+    </p>
+
+    <p class="back-home">
+      <a href="/">← Back to Home</a>
+    </p>
+  </div>
+
+</body>
+</html>

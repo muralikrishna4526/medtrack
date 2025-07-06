@@ -1,0 +1,32 @@
+<!-- templates/view_diagnosis.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Diagnosis Reports - MedTrack</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
+</head>
+<body class="doctor-dashboard">
+
+  <div class="container">
+    <h2>📋 Diagnosis Reports</h2>
+
+    {% if diagnoses %}
+      <ul>
+        {% for diag in diagnoses %}
+          <li style="margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 10px;">
+            <strong>👤 Patient:</strong> {{ diag.patient }}<br>
+            <strong>📝 Notes:</strong> {{ diag.notes }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No diagnosis reports available.</p>
+    {% endif %}
+
+    <p><a href="/dashboard">← Back to Dashboard</a></p>
+  </div>
+
+</body>
+</html>
