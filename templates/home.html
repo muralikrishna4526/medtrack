@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Welcome to MedTrack</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
+</head>
+<body>
+  <div class="container">
+    <h2>Welcome to MedTrack</h2>
+    <p><strong>MedTrack</strong> is a cloud-enabled healthcare system that simplifies doctor-patient communication.</p>
+    <ul>
+      <li>📅 Book Appointments Online</li>
+      <li>📝 Submit & Access Diagnosis Reports</li>
+      <li>🔐 Secure Access for Patients and Doctors</li>
+    </ul>
+    <p>This project uses AWS (EC2, DynamoDB, SNS), Flask, and Python to modernize healthcare workflows.</p>
+    <p>
+      <a href="/register">Get Started – Register</a> |
+      <a href="/login">Login</a>
+    </p>
+   
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MedTrack - Cloud Healthcare</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="homepage">
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-left">
+      <img src="{{ url_for('static', filename='logo.png') }}" alt="MedTrack Logo" class="nav-logo">
+      <span class="brand">MedTrack</span>
+    </div>
+    <div class="nav-right">
+      <a href="/">Home</a>
+      <a href="/register">Register</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact us</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Welcome to MedTrack</h1>
+    <p>Your Cloud-Enabled Healthcare Management System</p>
+    <a href="/register" class="btn">Get Started</a>
+  </section>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <h2>Why MedTrack?</h2>
+    <p>MedTrack connects patients and doctors with cloud-powered technology. Book appointments, track diagnoses, and manage healthcare—all in one place.</p>
+  </section>
+
+  <!-- ⭐ Testimonials Section -->
+  <section class="testimonials" id="testimonials">
+    <h2>What Our Users Say</h2>
+    <div class="testimonial-cards">
+      <div class="card">
+        <p>"MedTrack helped me manage appointments without hassle!"</p>
+        <h4>- Murali (Patient)</h4>
+      </div>
+      <div class="card">
+        <p>"The diagnosis system made my workflow smoother. Highly recommend!"</p>
+        <h4>- Dr. Krishna (Doctor)</h4>
+      </div>
+      <div class="card">
+        <p>"Clean UI and reliable booking—great platform!"</p>
+        <h4>- Sneha (Patient)</h4>
+      </div>
+    </div>
+  </section>
+
+  <!-- 💡 Features Section -->
+  <section class="features" id="features">
+    <h2>Our Core Features</h2>
+    <div class="feature-cards">
+      <div class="card">
+        <i class="fas fa-calendar-check fa-3x"></i>
+        <h3>Book Appointments</h3>
+        <p>Patients can schedule consultations with doctors easily.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-user-md fa-3x"></i>
+        <h3>Doctor Dashboard</h3>
+        <p>Doctors can view upcoming appointments and manage patients.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-notes-medical fa-3x"></i>
+        <h3>Diagnosis Reports</h3>
+        <p>Submit and track patient diagnoses with secure records.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 📞 Contact Us Section -->
+  <section class="contact" id="contact">
+    <h2>Contact Us</h2>
+    <p>If you have any questions or need help, feel free to reach out:</p>
+    <div class="contact-details">
+      <p><strong>📞 Phone:</strong> +91 98765 43210</p>
+      <p><strong>📧 Email:</strong> support@medtrack.com</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 MedTrack | Built with ❤ for SmartBridge AWS Project</p>
+  </footer>
+
+</body>
+</html>

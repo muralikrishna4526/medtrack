@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Doctor Appointments - MedTrack</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="doctor-dashboard">
+
+  <div class="container">
+    <h2>👨‍⚕️ Appointments for Dr. {{ session['username'] }}</h2>
+
+    {% if appointments %}
+      <ul>
+        {% for appt in appointments %}
+          <li>
+            <strong>Patient:</strong> {{ appt.patient }}<br>
+            <strong>Date:</strong> {{ appt.date }}<br>
+            <strong>Time:</strong> {{ appt.time }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No appointments have been booked yet.</p>
+    {% endif %}
+
+    <a href="/dashboard">← Back to Dashboard</a>
+  </div>
+
+</body>
+</html>
