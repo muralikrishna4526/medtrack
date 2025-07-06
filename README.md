@@ -22,7 +22,7 @@ MedTrack is a full-stack healthcare appointment and diagnosis management web app
 | *Frontend*   | HTML, CSS              |
 | *Backend*    | Python (Flask)         |
 | *Cloud*      | AWS EC2, AWS DynamoDB, AWS SNS  |
-| *Other*      | GitHub, VS Code        |
+| *Version Control*      | GitHub, VS Code        |
 
 ---
 
