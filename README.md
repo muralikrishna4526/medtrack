@@ -21,13 +21,13 @@ MedTrack is a full-stack healthcare appointment and diagnosis management web app
 |----------------|------------------------|
 | *Frontend*   | HTML, CSS              |
 | *Backend*    | Python (Flask)         |
-| *Cloud*      | AWS DynamoDB, AWS SNS  |
+| *Cloud*      | AWS EC2, AWS DynamoDB, AWS SNS  |
 | *Other*      | GitHub, VS Code        |
 
 ---
 
 ## 🔒 AWS Services Used
-
+-  *EC2*: Hosts the Flask web application on a scalable virtual server
 - *DynamoDB*: Stores Users, Appointments, Diagnoses
 - *SNS (Optional)*: Sends notifications for appointment bookings and diagnosis submissions
 
